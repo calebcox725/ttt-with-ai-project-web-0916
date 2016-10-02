@@ -36,10 +36,10 @@ class Game
   end
 
   def winner
-    if is_winner?("X")
-      "X"
-    elsif is_winner?("O")
-      "O"
+    if is_winner?("X".red)
+      "X".red
+    elsif is_winner?("O".blue)
+      "O".blue
     else
       nil
     end
@@ -85,8 +85,12 @@ class Game
     board.display
   end
 
-  def start
-    puts "\nWelcome to Tic-Tac-Toe!"
+  def start(first_game = true)
+    if first_game
+      puts "\n*************************"
+      puts " Welcome to Tic-Tac-Toe!".green
+      puts "*************************"
+    end
 
     players_select
     play
@@ -98,13 +102,13 @@ class Game
     humans = gets.chomp
 
     if humans == "0"
-      self.player_1 = Players::Computer.new("X")
-      self.player_2 = Players::Computer.new("O")
+      self.player_1 = Players::Computer.new("X".red)
+      self.player_2 = Players::Computer.new("O".blue)
     elsif humans == "1"
       human_vs_computer_select
     elsif humans == "2"
-      self.player_1 = Players::Human.new("X")
-      self.player_2 = Players::Human.new("O")
+      self.player_1 = Players::Human.new("X".red)
+      self.player_2 = Players::Human.new("O".blue)
     else
       puts "\nInvalid selection,try again."
       players_select
@@ -113,14 +117,14 @@ class Game
 
   def human_vs_computer_select 
     puts "\nWould you like to be X or O? (X goes first!)"
-    selection = gets.chomp
+    selection = gets.chomp.upcase
 
     if selection == "X"
-      self.player_1 = Players::Human.new("X")
-      self.player_2 = Players::Computer.new("O")
+      self.player_1 = Players::Human.new("X".red)
+      self.player_2 = Players::Computer.new("O".blue)
     elsif selection == "O"
-      self.player_1 = Players::Computer.new("X")
-      self.player_2 = Players::Human.new("O")
+      self.player_1 = Players::Computer.new("X".red)
+      self.player_2 = Players::Human.new("O".blue)
     else
       puts "\nInvalid selection, try again."
       human_vs_computer_select
@@ -132,7 +136,7 @@ class Game
     selection = gets.chomp
 
     if selection == "y"
-      start
+      start(false)
     elsif selection == "n"
       puts "\nOK, bye!"
     else
