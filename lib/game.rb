@@ -71,23 +71,28 @@ class Game
   end
 
   def play
-    self.board = Board.new
-
     while !over?
       turn
     end
 
     if won?
-      puts "\nCongratulations #{winner}!"
+      puts ""
+      puts "Congratulations #{winner}!"
     else
-      puts "\nCats Game!"
+      puts ""
+      puts "Cats Game!"
     end
     board.display
   end
 
-  def start
-    puts "\nWelcome to Tic-Tac-Toe!"
+  def start(first_game = true)
+    if first_game
+      puts "\n*************************"
+      puts " Welcome to Tic-Tac-Toe!"
+      puts "*************************"
+    end
 
+    board.reset!
     players_select
     play
     play_again_select
@@ -132,7 +137,7 @@ class Game
     selection = gets.chomp
 
     if selection == "y"
-      start
+      start(false)
     elsif selection == "n"
       puts "\nOK, bye!"
     else
