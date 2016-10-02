@@ -36,10 +36,10 @@ class Game
   end
 
   def winner
-    if is_winner?("X".red)
-      "X".red
-    elsif is_winner?("O".blue)
-      "O".blue
+    if is_winner?("X")
+      "X"
+    elsif is_winner?("O")
+      "O"
     else
       nil
     end
@@ -103,13 +103,13 @@ class Game
     humans = gets.chomp
 
     if humans == "0"
-      self.player_1 = Players::Computer.new("X".red)
-      self.player_2 = Players::Computer.new("O".blue)
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Computer.new("O")
     elsif humans == "1"
       human_vs_computer_select
     elsif humans == "2"
-      self.player_1 = Players::Human.new("X".red)
-      self.player_2 = Players::Human.new("O".blue)
+      self.player_1 = Players::Human.new("X")
+      self.player_2 = Players::Human.new("O")
     else
       puts "\nInvalid selection,try again."
       players_select
@@ -121,11 +121,11 @@ class Game
     selection = gets.chomp.upcase
 
     if selection == "X"
-      self.player_1 = Players::Human.new("X".red)
-      self.player_2 = Players::Computer.new("O".blue)
+      self.player_1 = Players::Human.new("X")
+      self.player_2 = Players::Computer.new("O")
     elsif selection == "O"
-      self.player_1 = Players::Computer.new("X".red)
-      self.player_2 = Players::Human.new("O".blue)
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Human.new("O")
     else
       puts "\nInvalid selection, try again."
       human_vs_computer_select
