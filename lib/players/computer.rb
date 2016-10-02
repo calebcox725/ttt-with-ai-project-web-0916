@@ -32,10 +32,11 @@ module Players
     def calculate_move
       return win_move if !win_move.nil?
       return block_move if !block_move.nil?
+      return fork_block_move if !fork_block_move.nil?
       return center_move if !center_move.nil?
       return opposite_corner_move if !opposite_corner_move.nil?
-      return empty_corner_move if !empty_corner_move.nil?
-      return empty_side_move if !empty_side_move.nil?
+      return corner_movey if !corner_movey.nil?
+      return side_move if !side_move.nil?
     end
 
     def winner_finder(token)
@@ -60,24 +61,37 @@ module Players
       move_list_validator(blockers)
     end
 
+    def fork_block_move
+      fork_blockers = CORNERS.each_with_object([]) do |corner, blockers|
+        corner_position = board.position(corner)
+        opposite_corner_position = board.position(10 - corner.to_i)
+
+        if corner_position == opponent_token && opposite_corner_position == opponent_token
+          blockers << side_move
+        end
+      end
+
+      move_list_validator(fork_blockers)
+    end
+
     def center_move
       move_list_validator(CENTER) if board.turn_count == 1
     end
 
     def opposite_corner_move
-      opposing_corners = CORNERS.find_all do |corner|
+      opposite_corners = CORNERS.find_all do |corner|
         opposite_corner = 10 - corner.to_i
-        board.position(opposite_corner) == opponent_token
+        board.taken?(opposite_corner)
       end
 
-      move_list_validator(opposing_corners)
+      move_list_validator(opposite_corners)
     end
 
-    def empty_corner_move
+    def corner_movey
       move_list_validator(CORNERS)    
     end
 
-    def empty_side_move
+    def side_move
       move_list_validator(SIDES)
     end
 
