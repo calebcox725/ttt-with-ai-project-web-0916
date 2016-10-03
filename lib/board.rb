@@ -10,11 +10,19 @@ class Board
   end
 
   def display
-    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts " #{cell_display(0)} | #{cell_display(1)} | #{cell_display(2)} "
     puts "-----------"
-    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts " #{cell_display(3)} | #{cell_display(4)} | #{cell_display(5)} "
     puts "-----------"
-    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts " #{cell_display(6)} | #{cell_display(7)} | #{cell_display(8)} "
+  end
+
+  def cell_display(cell_index)
+    if cells[cell_index] == " "
+      cell_index + 1
+    else
+      cells[cell_index]
+    end
   end
 
   def position(position)

@@ -25,7 +25,7 @@ module Players
     end
 
     def token_check(token)
-      token == "O" ? "X" : "O"
+      token == "O".blue ? "X".red : "O".blue
     end
 
     def calculate_move

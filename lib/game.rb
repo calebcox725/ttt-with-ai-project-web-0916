@@ -13,8 +13,8 @@ class Game
   attr_accessor :board, :player_1, :player_2
 
   def initialize(
-    player_1 = Players::Human.new("X"),
-    player_2 = Players::Human.new("O"),
+    player_1 = Players::Human.new("X".red),
+    player_2 = Players::Human.new("O".blue),
     board = Board.new
     )
 
@@ -36,10 +36,10 @@ class Game
   end
 
   def winner
-    if is_winner?("X")
-      "X"
-    elsif is_winner?("O")
-      "O"
+    if is_winner?("X".red)
+      "X".red
+    elsif is_winner?("O".blue)
+      "O".blue
     else
       nil
     end
@@ -88,7 +88,7 @@ class Game
   def start(first_game = true)
     if first_game
       puts "\n*************************"
-      puts " Welcome to Tic-Tac-Toe!"
+      puts " Welcome to Tic-Tac-Toe!".green
       puts "*************************"
     end
 
@@ -103,13 +103,13 @@ class Game
     humans = gets.chomp
 
     if humans == "0"
-      self.player_1 = Players::Computer.new("X")
-      self.player_2 = Players::Computer.new("O")
+      self.player_1 = Players::Computer.new("X".red)
+      self.player_2 = Players::Computer.new("O".blue)
     elsif humans == "1"
       human_vs_computer_select
     elsif humans == "2"
-      self.player_1 = Players::Human.new("X")
-      self.player_2 = Players::Human.new("O")
+      self.player_1 = Players::Human.new("X".red)
+      self.player_2 = Players::Human.new("O".blue)
     else
       puts "\nInvalid selection,try again."
       players_select
@@ -121,11 +121,11 @@ class Game
     selection = gets.chomp.upcase
 
     if selection == "X"
-      self.player_1 = Players::Human.new("X")
-      self.player_2 = Players::Computer.new("O")
+      self.player_1 = Players::Human.new("X".red)
+      self.player_2 = Players::Computer.new("O".blue)
     elsif selection == "O"
-      self.player_1 = Players::Computer.new("X")
-      self.player_2 = Players::Human.new("O")
+      self.player_1 = Players::Computer.new("X".red)
+      self.player_2 = Players::Human.new("O".blue)
     else
       puts "\nInvalid selection, try again."
       human_vs_computer_select
